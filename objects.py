@@ -67,7 +67,9 @@ class Board:
         self.board_list = [[Tile(col, row, self.tileempty, "?", self.tilesize) for row in range(self.rows)] for col in range(self.cols)]
         self.dug = []
 
-        
+    def ai_move(self):
+        print("HELLO AI")
+
     def handle_click(self, mouse_pos, button):
         x, y = mouse_pos
         x //= self.tilesize

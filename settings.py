@@ -24,11 +24,10 @@ FPS = 60
 TITLE = "Minesweeper AI"
 
 pygame.init()
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((WIDTH, HEIGHT + 80))
 clock = pygame.time.Clock()
 pygame.display.set_caption(TITLE)
 FONT = pygame.font.SysFont(pygame.font.get_default_font(), 50)
-
 
 TEXT_COLOR = (255, 255, 255)
 

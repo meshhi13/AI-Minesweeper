@@ -16,7 +16,7 @@ def menu_loop(state):
             if i == selected_index:
                 color = COLOR_INACTIVE
             else:
-                color = WHITE
+                color = TEXT_COLOR
             text = FONT.render(item, True, color)
             rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + (i-1.5) * 70))
             screen.blit(text, rect)
