@@ -29,7 +29,7 @@ def game_loop(rows, cols, mines):
                 button = event.button
                 if text_rect.collidepoint(mouse_pos) and not board.gameover:
                     board.ai_move()
-                if text_rect.collidepoint(mouse_pos) and board.gameover:
+                elif text_rect.collidepoint(mouse_pos) and board.gameover:
                     return
                 else:
                     board.handle_click(mouse_pos, button)
@@ -51,4 +51,4 @@ def game_loop(rows, cols, mines):
             text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
             screen.blit(text, text_rect)            
 
-        pygame.display.flip()
+        pygame.display.update()
