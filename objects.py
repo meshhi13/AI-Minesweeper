@@ -27,6 +27,7 @@ class Tile:
         self.type = type
         self.revealed = revealed
         self.flagged = flagged
+        self.clicked_ai = False
 
     def draw(self, board_surface):
         if self.flagged:
@@ -51,6 +52,7 @@ class Board:
         self.gameover = False
         self.victory = False
         self.first_click = True
+        self.no_moves = False
 
         for i in range(1, 9):
             self.tilenumbers.append(pygame.transform.scale(pygame.image.load(os.path.join(dirname, f"Assets\Tile{i}.png")), (tilesize, tilesize)))
@@ -68,13 +70,58 @@ class Board:
         self.dug = []
 
     def ai_move(self):
-        print("HELLO AI")
+        self.check_clues()
+        self.click_around()
+
+
+    def check_clues(self):
+        self.no_moves = True
+        for row in self.board_list:
+            for tile in row:
+                x = tile.x // self.tilesize
+                y = tile.y // self.tilesize
+                unknown = []
+                if tile.revealed and tile.type in (str(i) for i in range(1, 9)):
+                    for x_offset in range(-1, 2):
+                        for y_offset in range(-1, 2):
+                            if x + x_offset >= 0 and x + x_offset < self.rows and y + y_offset >= 0 and y + y_offset < self.cols:
+                                if not self.board_list[x + x_offset][y + y_offset].revealed and not self.board_list[x + x_offset][y + y_offset].flagged:
+                                    unknown.append(self.board_list[x + x_offset][y + y_offset])
+
+                    if len(unknown) == int(tile.type):
+                        print(unknown)
+                        for tile in unknown:
+                            tile.clicked_ai = True
+                            tile.flagged = True
+                            self.no_moves = False
+        print("\n")
+        
+    def click_around(self):
+        for row in self.board_list:
+            for tile in row:
+                if tile.type in (str(i) for i in range(1, 9)) and tile.revealed:
+                    x = tile.x // self.tilesize
+                    y = tile.y // self.tilesize
+                    clicked = []
+                    for x_offset in range(-1, 2):
+                        for y_offset in range(-1, 2):
+                            if x + x_offset >= 0 and x + x_offset < self.rows and y + y_offset >= 0 and y + y_offset < self.cols:
+                                if self.board_list[x + x_offset][y + y_offset].clicked_ai:
+                                    clicked.append(self.board_list[x + x_offset][y + y_offset])
+
+                    if len(clicked) == int(tile.type):
+                        for x_offset in range(-1, 2):
+                            for y_offset in range(-1, 2):
+                                if x + x_offset >= 0 and x + x_offset < self.rows and y + y_offset >= 0 and y + y_offset < self.cols:
+                                    self.dig(x + x_offset, y + y_offset)
+                                    self.check_victory()
 
     def handle_click(self, mouse_pos, button):
         x, y = mouse_pos
         x //= self.tilesize
         y //= self.tilesize
 
+        self.no_moves = False
         if button == 1:
             if not self.board_list[x][y].flagged and (x, y) not in self.dug:
                 self.dig(x, y)
@@ -122,14 +169,12 @@ class Board:
         
 
     def place_mines(self, x, y):
-        print("PLACING MINES")
         excluded_tiles = []
         placed_mines = 0
         for x_offset in range(-1, 2):
             for y_offset in range(-1, 2):
                 if x + x_offset >= 0 and x + x_offset < self.rows and y + y_offset >= 0 and y + y_offset < self.cols:
                     excluded_tiles.append((x + x_offset, y + y_offset))
-        print(excluded_tiles)
                     
         for tile in range(self.mines):
             if placed_mines >= self.rows * self.cols - len(excluded_tiles):
@@ -189,6 +234,8 @@ class Board:
             for tile in row:
                 tile.draw(self.board_surface)
         screen.blit(self.board_surface, (0, 0))
+
+
 
     def display(self):
         for row in self.board_list:

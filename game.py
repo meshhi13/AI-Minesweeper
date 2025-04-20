@@ -21,6 +21,7 @@ def game_loop(rows, cols, mines):
         screen.blit(text, text_rect)
 
         for event in pygame.event.get():
+            mouse_x, mouse_y = pygame.mouse.get_pos()
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -31,11 +32,10 @@ def game_loop(rows, cols, mines):
                     board.ai_move()
                 elif text_rect.collidepoint(mouse_pos) and board.gameover:
                     return
-                else:
+                elif mouse_x > 0 and mouse_x < WIDTH and mouse_y > 0 and mouse_y < HEIGHT:
                     board.handle_click(mouse_pos, button)
 
             elif event.type == pygame.MOUSEMOTION:
-                mouse_x, mouse_y = pygame.mouse.get_pos()
                 if text_rect.collidepoint(mouse_x, mouse_y):
                     text_highlight = True
                 else: 
@@ -49,6 +49,14 @@ def game_loop(rows, cols, mines):
 
             text = FONT.render("YOU WON!" if board.victory else "YOU LOST!", True, (255, 255, 255))
             text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-            screen.blit(text, text_rect)            
+            screen.blit(text, text_rect)   
+
+        if board.no_moves:
+            text1 = FONT.render("NO MOVES FOUND", True, (255, 0, 0))  
+            text2 = FONT.render("CLICK A TILE", True, (255, 0, 0))  
+            text1_rect = text1.get_rect(center=(WIDTH // 2, HEIGHT // 2 - text1.get_height()))
+            text2_rect = text2.get_rect(center=(WIDTH // 2, HEIGHT // 2 + text1.get_height()))
+            screen.blit(text1, text1_rect)
+            screen.blit(text2, text2_rect)         
 
         pygame.display.update()
