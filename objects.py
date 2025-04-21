@@ -85,16 +85,15 @@ class Board:
                     for x_offset in range(-1, 2):
                         for y_offset in range(-1, 2):
                             if x + x_offset >= 0 and x + x_offset < self.rows and y + y_offset >= 0 and y + y_offset < self.cols:
-                                if not self.board_list[x + x_offset][y + y_offset].revealed and not self.board_list[x + x_offset][y + y_offset].flagged:
+                                if not self.board_list[x + x_offset][y + y_offset].revealed:
                                     unknown.append(self.board_list[x + x_offset][y + y_offset])
 
                     if len(unknown) == int(tile.type):
-                        print(unknown)
                         for tile in unknown:
-                            tile.clicked_ai = True
-                            tile.flagged = True
-                            self.no_moves = False
-        print("\n")
+                            if not tile.flagged and not tile.clicked_ai:
+                                tile.clicked_ai = True
+                                tile.flagged = True
+                                self.no_moves = False
         
     def click_around(self):
         for row in self.board_list:
@@ -115,6 +114,7 @@ class Board:
                                 if x + x_offset >= 0 and x + x_offset < self.rows and y + y_offset >= 0 and y + y_offset < self.cols:
                                     self.dig(x + x_offset, y + y_offset)
                                     self.check_victory()
+
 
     def handle_click(self, mouse_pos, button):
         x, y = mouse_pos
