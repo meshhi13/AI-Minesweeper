@@ -6,7 +6,6 @@ import sys
 def game_loop(rows, cols, mines):
     tilesize = WIDTH // cols
     board = Board(tilesize, rows, cols, mines)
-    board.display()
     text_highlight = False
 
     while True:

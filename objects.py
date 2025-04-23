@@ -125,7 +125,6 @@ class Board:
         if button == 1:
             if not self.board_list[x][y].flagged and (x, y) not in self.dug:
                 self.dig(x, y)
-                self.display()
                 self.check_victory()
         elif button == 3:
             if (x, y) not in self.dug:
@@ -234,10 +233,3 @@ class Board:
             for tile in row:
                 tile.draw(self.board_surface)
         screen.blit(self.board_surface, (0, 0))
-
-
-
-    def display(self):
-        for row in self.board_list:
-            print(row)
-        print("\n")
