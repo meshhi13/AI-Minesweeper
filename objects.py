@@ -70,12 +70,11 @@ class Board:
         self.dug = []
 
     def ai_move(self):
+        self.no_moves = True
         self.check_clues()
         self.click_around()
 
-
     def check_clues(self):
-        self.no_moves = True
         for row in self.board_list:
             for tile in row:
                 x = tile.x // self.tilesize

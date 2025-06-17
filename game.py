@@ -42,6 +42,7 @@ def game_loop(rows, cols, mines):
 
 
         if board.gameover:
+            board.no_moves = False
             overlay = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
             overlay.fill((0, 0, 0, 100)) 
             screen.blit(overlay, (0, 0))
