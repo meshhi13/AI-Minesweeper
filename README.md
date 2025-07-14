@@ -56,4 +56,4 @@ python main.py
    - If you reveal a mine, you lose.
    - If all non-mine tiles are revealed and all mines are flagged, you win.
 
-Enjoy playing Minesweeper with AI assistance!
+*Enjoy playing Minesweeper with AI assistance!*
