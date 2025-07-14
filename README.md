@@ -10,10 +10,11 @@ Before running the game, ensure you have the following installed:
 - Python 3.8 or higher
 - `pygame` library
 
-To install `pygame`, run:
-```bash
-pip install pygame
-```
+## Features
+
+- **AI Assistance**: The AI can analyze the board and make moves or flag tiles based on clues.
+- **Dynamic Board**: The board size and number of mines can be customized.
+- **Visual Feedback**: The game provides visual cues for flagged tiles, revealed tiles, and game status.
 
 ## Project Structure
 ```
@@ -28,6 +29,7 @@ AI-Minesweeper/
 ├── Assets/
 │   ├── Tile1.png
 │   └── ...
+├── ...
 ```
 
 ## How to Run
@@ -53,11 +55,5 @@ python main.py
 3. **Game Over**:
    - If you reveal a mine, you lose.
    - If all non-mine tiles are revealed and all mines are flagged, you win.
-
-## Features
-
-- **AI Assistance**: The AI can analyze the board and make moves or flag tiles based on clues.
-- **Dynamic Board**: The board size and number of mines can be customized.
-- **Visual Feedback**: The game provides visual cues for flagged tiles, revealed tiles, and game status.
 
 Enjoy playing Minesweeper with AI assistance!
