@@ -3,7 +3,7 @@
 
 This is a Python implementation of the classic Minesweeper game with an AI assistant to help you play. The game is built using the `pygame` library.
 
-![Screen Recording 2025-07-14 at 4 49 50 PM](https://github.com/user-attachments/assets/b33d3f40-c946-47fb-a8aa-1e1cf10f036a)
+![Screen Recording 2025-07-14 at 4 52 55 PM](https://github.com/user-attachments/assets/28fe75db-78ba-4445-8045-5a071e4ccc3d)
 
 ## Requirements
 
