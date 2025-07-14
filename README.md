@@ -17,7 +17,10 @@ pip install pygame
 
 ## How to Run
 
-1. Clone or download this repository to your local machine.
+1. Clone the repository.
+```sh
+git clone https://github.com/meshhi13/AI-Minesweeper
+```
 2. Navigate to the project directory.
 3. Run the game using the following command:
 ```bash
