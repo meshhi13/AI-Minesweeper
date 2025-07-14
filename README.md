@@ -15,6 +15,21 @@ To install `pygame`, run:
 pip install pygame
 ```
 
+## Project Structure
+```
+AI-Minesweeper/
+├── main.py
+├── game.py
+├── gamestate.py
+├── menu.py
+├── menuitems.py
+├── objects.py
+├── settings.py
+├── Assets/
+│   ├── Tile1.png
+│   └── ...
+```
+
 ## How to Run
 
 1. Clone the repository.
